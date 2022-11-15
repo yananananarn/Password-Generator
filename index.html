@@ -6,36 +6,45 @@
         <style>
             body{
             padding: 10px;
+            background: #ffffff
+            }
+            h1 {
+            color: #7cd0f2;
             }
             h1,p {
             text-align: center;
             }
 
-            #saikoro {
+            #generation-password {
+            color: #7cd0f2;
+            font-size: 50px;
+            }
+            .gene-btn {
             margin: 50px auto;
             width: auto;
             height: auto;
-            max-width: 400px;
-            border: 1px solid #333;
+            max-width: 350px;
+            border: 1px solid #bbb;
             text-align: center;
-            padding:  60px 0;
+            color: #fff;
+            padding:  40px 0;
             box-sizing: border-box;
             font-size: 50px;
             border-radius: 20px;
-            background: #eee;
+            background: #7cd0f2;
             }
 
-            #saikoro:hover {
+            .gene-btn:hover {
             cursor: pointer;
-            opacity: 0.5;
+            opacity: 0.7;
             }
             /* スマホ用設定 */
             @media screen and (max-width: 380px){
             h1 {
             font-size: 8vw;
             }
-            #saikoro {
-            font-size: 10vw;
+            #generation-password, .gene-btn {
+            font-size: 13vw;
             }
             }
         </style>
@@ -44,32 +53,30 @@
         <h1>パスワード作成ツール</h1>
         <p>パスワードを自動生成してくれます</p>
         <p>英小文字、英大文字、数字を必ず含めます</p>
-        <div id="saikoro">生成</div>
-        <script>
-            //要素取得
-            const saikoro = document.getElementById("saikoro");
-
-            const small_alphabets = "abcdefghijklmnopqrstuvwxyz";
-            const large_alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            const number = "0123456789"
-
-            // パスワード生成
-            function generation(){
-                const character = [...small_alphabets + large_alphabets + number]
-                const conditions = "/[a-z][A-Z][0-9]/"
-                
-                do {
-                    password = ""
-                    for (let step = 0; step < 10; step++) {
-                        const nmb = Math.floor(Math.random() * character.length);
-                        password += character[nmb]
-                    }
-                } while(password.search(/[a-z][A-Z][0-9]/) == -1);
-                saikoro.innerHTML = password; 
-            }
-
-            //イベント
-            saikoro.addEventListener("click", generation, false);            
-        </script>
+        <p id="generation-password">password</p>
+        <div class="gene-btn" onclick="generation()">生成</div>
     </body>
+    <script>
+        //要素取得
+        const passwordGeneration = document.getElementById("generation-password");
+
+        const small_alphabets = "abcdefghijklmnopqrstuvwxyz";
+        const large_alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const number = "0123456789"
+
+        // パスワード生成
+        function generation(){
+            const character = [...small_alphabets + large_alphabets + number]
+            const conditions = "/[a-z][A-Z][0-9]/"
+            
+            do {
+                password = ""
+                for (let step = 0; step < 10; step++) {
+                    const nmb = Math.floor(Math.random() * character.length);
+                    password += character[nmb]
+                }
+            } while(password.search(/[a-z][A-Z][0-9]/) == -1);
+            passwordGeneration.textContent = password; 
+        }          
+    </script>
 </html>
