@@ -11,7 +11,7 @@
             text-align: center;
             }
 
-            #saikoro {
+            #passwordGeneration {
             margin: 50px auto;
             width: auto;
             height: auto;
@@ -25,7 +25,7 @@
             background: #eee;
             }
 
-            #saikoro:hover {
+            #passwordGeneration:hover {
             cursor: pointer;
             opacity: 0.5;
             }
@@ -34,7 +34,7 @@
             h1 {
             font-size: 8vw;
             }
-            #saikoro {
+            #passwordGeneration {
             font-size: 10vw;
             }
             }
@@ -44,10 +44,10 @@
         <h1>パスワード作成ツール</h1>
         <p>パスワードを自動生成してくれます</p>
         <p>英小文字、英大文字、数字を必ず含めます</p>
-        <div id="saikoro">生成</div>
+        <div id="passwordGeneration">生成</div>
         <script>
             //要素取得
-            const saikoro = document.getElementById("saikoro");
+            const passwordGeneration = document.getElementById("passwordGeneration");
 
             const small_alphabets = "abcdefghijklmnopqrstuvwxyz";
             const large_alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -65,11 +65,11 @@
                         password += character[nmb]
                     }
                 } while(password.search(/[a-z][A-Z][0-9]/) == -1);
-                saikoro.innerHTML = password; 
+                passwordGeneration.innerHTML = password; 
             }
 
             //イベント
-            saikoro.addEventListener("click", generation, false);            
+            passwordGeneration.addEventListener("click", generation, false);            
         </script>
     </body>
 </html>
