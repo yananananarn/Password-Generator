@@ -2,9 +2,10 @@
 <html>
     <head>
         <title>password generator</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
         <style>
             body{
-            padding: 20px;
+            padding: 10px;
             }
             h1,p {
             text-align: center;
@@ -12,20 +13,30 @@
 
             #saikoro {
             margin: 50px auto;
-            width: 400px;
-            height: 200px;
+            width: auto;
+            height: auto;
+            max-width: 400px;
             border: 1px solid #333;
             text-align: center;
             padding:  60px 0;
             box-sizing: border-box;
             font-size: 50px;
-            border-radius: 10px;
+            border-radius: 20px;
             background: #eee;
             }
 
             #saikoro:hover {
             cursor: pointer;
             opacity: 0.5;
+            }
+            /* スマホ用設定 */
+            @media screen and (max-width: 380px){
+            h1 {
+            font-size: 8vw;
+            }
+            #saikoro {
+            font-size: 10vw;
+            }
             }
         </style>
     </head>
