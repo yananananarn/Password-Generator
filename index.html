@@ -15,6 +15,12 @@
             h1,h2,p,.checkbox {
             text-align: center;
             }
+            img {
+            display: block;
+            margin: auto;
+            width: 100%;
+            max-width: 450px;
+            }
             hr {
             width:60%;
             max-width: 450px;
@@ -32,6 +38,7 @@
             #generation-password {
             color: #7cd0f2;
             font-size: 50px;
+            margin: 50px auto;
             overflow-wrap: break-word;
             }
             .gene-btn {
@@ -80,7 +87,7 @@
     <body>
         <h1>パスワード作成ツール</h1>
         <p>パスワードを自動生成してくれます</p>
-        <p>文字数や含める文字の設定は下にあります</p>
+        <p>注意事項を読んでからお使いください</p>
         <p id="generation-password">password</p>
         <div class="gene-btn" onclick="generation()">生成</div>
 
@@ -95,6 +102,16 @@
             <input type="checkbox" id="large_alphabets">英大文字<br>
             <input type="checkbox" id="number">数字　　<br>
         </form>
+        <br>
+        <div>
+        <h2>注意事項</h2>
+        <hr>
+            <p>このサイトで生成されたパスワードは意図的な保存や<br>他のサービスへの送信はしていません。<br>ただし使用する際は自己責任でお願いいたします。</p>
+            <p>このサイトの中身はこちら</p>
+            <a href="https://github.com/yananananarn/Password-Generator">
+                <img src="https://gh-card.dev/repos/yananananarn/Password-Generator.svg">
+            </a>
+        </div>
     </body>
     <script>
         //要素取得
