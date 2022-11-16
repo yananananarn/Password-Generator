@@ -6,25 +6,47 @@
         <style>
             body{
             padding: 10px;
-            background: #ffffff
+            background: #ffffff;
+            color: #444;
             }
-            h1 {
+            h1,h2 {
             color: #7cd0f2;
             }
-            h1,p {
+            h1,h2,p,.checkbox {
             text-align: center;
+            }
+            img {
+            display: block;
+            margin: auto;
+            width: 100%;
+            max-width: 450px;
+            }
+            hr {
+            width:60%;
+            max-width: 450px;
+            }
+            input {
+            width: 90px;
+            font-size: 16px;
+            box-sizing: border-box;
+            margin: 0.7em 0;
+            padding: .8em;
+            border-radius: 2em;
+            border: 2px solid #aaa;
             }
 
             #generation-password {
             color: #7cd0f2;
             font-size: 50px;
+            margin: 50px auto;
+            overflow-wrap: break-word;
             }
             .gene-btn {
             margin: 50px auto;
             width: auto;
             height: auto;
             max-width: 350px;
-            border: 1px solid #bbb;
+            border: 2px solid #aaa;
             text-align: center;
             color: #fff;
             padding:  40px 0;
@@ -39,12 +61,25 @@
             opacity: 0.7;
             }
             /* スマホ用設定 */
-            @media screen and (max-width: 380px){
+            @media screen and (max-width: 420px){
             h1 {
             font-size: 8vw;
             }
-            #generation-password, .gene-btn {
+            h2 {
+            margin: 30px auto auto 0;
+            }
+            input {
+            margin: 0.7em 0;
+            }
+            #generation-password {
             font-size: 13vw;
+            margin: 0px;
+            }
+            .gene-btn {
+            font-size: 10vw;
+            width: 75%;
+            padding: 20px;
+            margin: 10px auto;
             }
             }
         </style>
@@ -52,31 +87,97 @@
     <body>
         <h1>パスワード作成ツール</h1>
         <p>パスワードを自動生成してくれます</p>
-        <p>英小文字、英大文字、数字を必ず含めます</p>
+        <p>注意事項を読んでからお使いください</p>
         <p id="generation-password">password</p>
         <div class="gene-btn" onclick="generation()">生成</div>
+
+        <h2>設定</h2>
+        <hr>
+        <form class="checkbox" name="settings">
+            <p>
+                文字数：
+                <input type="number" min="3" max="100" value="10" inputmode="numeric" id="pas-len">
+            </p>
+            <input type="checkbox" id="small_alphabets">英小文字<br>
+            <input type="checkbox" id="large_alphabets">英大文字<br>
+            <input type="checkbox" id="number">数字　　<br>
+        </form>
+        <br>
+        <div>
+        <h2>注意事項</h2>
+        <hr>
+            <p>このサイトで生成されたパスワードは意図的な保存や<br>他のサービスへの送信はしていません。<br>ただし使用する際は自己責任でお願いいたします。</p>
+            <p>このサイトの中身はこちら</p>
+            <a href="https://github.com/yananananarn/Password-Generator">
+                <img src="https://gh-card.dev/repos/yananananarn/Password-Generator.svg">
+            </a>
+        </div>
     </body>
     <script>
         //要素取得
         const passwordGeneration = document.getElementById("generation-password");
+        const passwordLength = document.getElementById("pas-len");
 
         const small_alphabets = "abcdefghijklmnopqrstuvwxyz";
         const large_alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const number = "0123456789"
 
+        const shuffleArray = (array) => {
+            const cloneArray = [...array]
+
+            for (let i = cloneArray.length - 1; i >= 0; i--) {
+                let rand = Math.floor(Math.random() * (i + 1))
+                let tmpStorage = cloneArray[i]
+                cloneArray[i] = cloneArray[rand]
+                cloneArray[rand] = tmpStorage
+            }
+
+            return cloneArray
+        }
+
         // パスワード生成
         function generation(){
-            const character = [...small_alphabets + large_alphabets + number]
-            const conditions = "/[a-z][A-Z][0-9]/"
+            let character = ""
+            character += small_alphabets
+            character += large_alphabets
+            character += number
+            character_array = shuffleArray(character);
+
+            let conditions = useCharacter();
+            // alert(conditions)
+            reg = new RegExp(conditions);
             
-            do {
-                password = ""
-                for (let step = 0; step < 10; step++) {
-                    const nmb = Math.floor(Math.random() * character.length);
-                    password += character[nmb]
-                }
-            } while(password.search(/[a-z][A-Z][0-9]/) == -1);
-            passwordGeneration.textContent = password; 
-        }          
+            try {
+                do {
+                    var password = ""
+                    for (let step = 0; step < passwordLength.value; step++) {
+                        const nmb = Math.floor(Math.random() * character_array.length);
+                        password += character_array[nmb]
+                    }
+                } while(password.search(reg) == -1);
+            } catch (error) {
+                alert("生成エラー");
+            }
+
+            password = shuffleArray(password)
+
+            passwordGeneration.textContent = password.join("");
+        }
+        function useCharacter() {
+            useCha = ""
+            if (document.getElementById("small_alphabets").checked) {
+                useCha += "[a-z]"
+            }
+            if (document.getElementById("large_alphabets").checked) {
+                useCha += "[A-Z]"
+            }
+            if (document.getElementById("number").checked) {
+                useCha += "[0-9]"
+            }
+            if (useCha == "") {
+                useCha = ""
+            }
+            return useCha;
+        }
     </script>
 </html>
