@@ -73,7 +73,7 @@
 
         <h2>設定</h2>
         <hr>
-        <form class="checkbox" name="form1">
+        <form class="checkbox" name="settings">
             <p>
                 文字数：
                 <input type="number" min="3" max="100" value="10" inputmode="numeric" id="pas-len">
@@ -92,6 +92,20 @@
         const large_alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const number = "0123456789"
 
+        const shuffleArray = (array) => {
+            const cloneArray = [...array]
+
+            for (let i = cloneArray.length - 1; i >= 0; i--) {
+                let rand = Math.floor(Math.random() * (i + 1))
+                // 配列の要素の順番を入れ替える
+                let tmpStorage = cloneArray[i]
+                cloneArray[i] = cloneArray[rand]
+                cloneArray[rand] = tmpStorage
+            }
+
+            return cloneArray
+        }
+
         // パスワード生成
         function generation(){
             let character = ""
@@ -99,7 +113,7 @@
             character += small_alphabets
             character += large_alphabets
             character += number
-            character_array = [...character]
+            character_array = shuffleArray(character);
             const conditions = "/[a-z][A-Z][0-9]/"
             
             try {
@@ -113,9 +127,10 @@
             } catch (error) {
                 alert("生成エラー");
             }
-       
 
-            passwordGeneration.textContent = password;
+            password = shuffleArray(password)
+
+            passwordGeneration.textContent = password.join("");
         }
         function useCharacter() {
             useCha = ""
