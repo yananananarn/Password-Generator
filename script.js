@@ -47,6 +47,8 @@ function generation(){
 
     passwordGeneration.textContent = password.join("");
 }
+
+// 必ず入れる文字の種類（正規表現）
 function useCharacter() {
     useCha = ""
     if (document.getElementById("small_alphabets").checked) {
@@ -62,4 +64,15 @@ function useCharacter() {
         useCha = ""
     }
     return useCha;
+}
+
+// パスワードをコピー
+function copyToClipboard() {
+    // コピー対象をJavaScript上で変数として定義する
+    var copyTarget = passwordGeneration.textContent;
+
+    navigator.clipboard.writeText(copyTarget);
+
+    // コピーをお知らせする
+    alert("コピーできました！ : " + copyTarget);
 }
