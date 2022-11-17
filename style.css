@@ -41,7 +41,7 @@ input {
     width: auto;
     height: auto;
     max-width: 350px;
-    border: 2px solid #aaa;
+    border: 0px solid #aaa;
     text-align: center;
     color: #fff;
     padding:  40px 0;
@@ -52,7 +52,7 @@ input {
 }
 .gene-btn:hover {
     cursor: pointer;
-    opacity: 0.7;
+    background: #4bbae6
 }
 .copy-btn {
     margin: 10px auto;
@@ -78,12 +78,13 @@ input {
 }
 .radiobutton {
     display: none;
-    border: 2px solid #aaa;
-    border-radius: 10px;
 }
 label {
     background-color: #eee;
-    padding: 10px 20px;
+    margin: 10px;
+    padding: 15px 20px;
+    border: 0px solid #aaa;
+    border-radius: 10px;
 }
 .radiobutton:checked + label {
     background-color: #7cd0f2;
@@ -114,5 +115,13 @@ label {
         width: 75%;
         padding: 20px;
         margin: 10px auto;
+    }
+    /* TODO:要修正 */
+    .radiobox {
+        display: flex;
+        flex-flow: column;
+    }
+    label {
+        margin: 4px;
     }
 }
