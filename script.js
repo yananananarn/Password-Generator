@@ -6,6 +6,8 @@ const small_alphabets = "abcdefghijklmnopqrstuvwxyz";
 const large_alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const number = "0123456789"
 
+let exit_flag = false;
+
 const shuffleArray = (array) => {
     const cloneArray = [...array]
 
@@ -21,17 +23,15 @@ const shuffleArray = (array) => {
 
 // パスワード生成
 function generation(){
-    let character = ""
-    character += small_alphabets
-    character += large_alphabets
-    character += number
+    let [character, conditions] = useCharacter();
+    
     character_array = shuffleArray(character);
-
-    let conditions = useCharacter();
-    // alert(conditions)
     reg = new RegExp(conditions);
     
     try {
+        if (exit_flag) {
+            throw new Error('終了します');
+        }
         do {
             var password = ""
             for (let step = 0; step < passwordLength.value; step++) {
@@ -41,6 +41,7 @@ function generation(){
         } while(password.search(reg) == -1);
     } catch (error) {
         alert("生成エラー");
+        exit_flag = false;
     }
 
     password = shuffleArray(password)
@@ -50,20 +51,30 @@ function generation(){
 
 // 必ず入れる文字の種類（正規表現）
 function useCharacter() {
-    useCha = ""
-    if (document.getElementById("small_alphabets").checked) {
-        useCha += "[a-z]"
+    const set_small = document.settings.small_alphabets;
+    const set_large = document.settings.large_alphabets;
+    const set_number = document.settings.number;
+
+    useCha = "";
+    mustCha = "";
+
+    if (!(set_small[2].checked)) {
+        useCha += small_alphabets;
+        if (set_small[0].checked) mustCha += "[a-z]";
     }
-    if (document.getElementById("large_alphabets").checked) {
-        useCha += "[A-Z]"
+    if (!(set_large[2].checked)) {
+        useCha += large_alphabets;
+        if (set_large[0].checked) mustCha += "[A-Z]";
     }
-    if (document.getElementById("number").checked) {
-        useCha += "[0-9]"
+    if (!(set_number[2].checked)) {
+        useCha += number;
+        if (set_number[0].checked) mustCha += "[0-9]";
     }
-    if (useCha == "") {
-        useCha = ""
+    if (useCha == ""){
+        alert("なにかしらの文字を使用してください");
+        exit_flag = true;
     }
-    return useCha;
+    return [useCha, mustCha];
 }
 
 // パスワードをコピー
@@ -74,5 +85,5 @@ function copyToClipboard() {
     navigator.clipboard.writeText(copyTarget);
 
     // コピーをお知らせする
-    alert("コピーできました！ : " + copyTarget);
+    alert("\nクリップボードにコピーしました！\n\n" + copyTarget);
 }

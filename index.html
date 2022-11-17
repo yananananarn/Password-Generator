@@ -18,12 +18,36 @@
         <hr>
         <form class="checkbox" name="settings">
             <p>
-                文字数：
+                文字数　
                 <input type="number" min="3" max="100" value="10" inputmode="numeric" id="pas-len">
             </p>
-            <input type="checkbox" id="small_alphabets">英小文字<br>
-            <input type="checkbox" id="large_alphabets">英大文字<br>
-            <input type="checkbox" id="number">数字　　<br>
+            <div class="radiobox">
+                <p>英小文字</p>
+                <input id="radio1" class="radiobutton" name="small_alphabets" type="radio">
+                <label for="radio1">必ず入れる</label>
+                <input id="radio2" class="radiobutton" name="small_alphabets" type="radio" checked>
+                <label for="radio2">どっちでも</label> 
+                <input id="radio3" class="radiobutton" name="small_alphabets" type="radio">
+                <label for="radio3">入れない</label>
+            </div>
+            <div class="radiobox">
+                <p>英大文字</p>
+                <input id="radio4" class="radiobutton" name="large_alphabets" type="radio">
+                <label for="radio4">必ず入れる</label>
+                <input id="radio5" class="radiobutton" name="large_alphabets" type="radio" checked>
+                <label for="radio5">どっちでも</label> 
+                <input id="radio6" class="radiobutton" name="large_alphabets" type="radio">
+                <label for="radio6">入れない</label>
+            </div>
+            <div class="radiobox">
+                <p>数字</p>
+                <input id="radio7" class="radiobutton" name="number" type="radio">
+                <label for="radio7">必ず入れる</label>
+                <input id="radio8" class="radiobutton" name="number" type="radio" checked>
+                <label for="radio8">どっちでも</label> 
+                <input id="radio9" class="radiobutton" name="number" type="radio">
+                <label for="radio9">入れない</label>
+            </div>
         </form>
         <br>
         <div>
