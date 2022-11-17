@@ -24,10 +24,6 @@ const shuffleArray = (array) => {
 // パスワード生成
 function generation(){
     let [character, conditions] = useCharacter();
-    // let receive = useCharacter();
-    // let character = receive[0];
-    // let conditions = receive[1];
-    alert(character + "\n" + conditions);
     
     character_array = shuffleArray(character);
     reg = new RegExp(conditions);
@@ -89,5 +85,5 @@ function copyToClipboard() {
     navigator.clipboard.writeText(copyTarget);
 
     // コピーをお知らせする
-    alert("コピーできました！ : " + copyTarget);
+    alert("\nクリップボードにコピーしました！\n\n" + copyTarget);
 }
